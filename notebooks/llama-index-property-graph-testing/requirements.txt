@@ -1,0 +1,7 @@
+llama-index
+llama-index-graph-stores-neo4j 
+llama-index-vector-stores-qdrant
+llama-index-llms-azure-openai
+python-dotenv
+llama-index-embeddings-azure-openai
+pyvis

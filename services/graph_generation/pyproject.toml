@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "src"
+version = "0.1.0"
+description = ""
+authors = ["Mariano Chicatun <marianochicatun@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+llama-index = "^0.10.46"
+llama-index-graph-stores-neo4j = "^0.2.5"
+llama-index-llms-azure-openai = "^0.1.8"
+python-dotenv = "^1.0.1"
+llama-index-embeddings-azure-openai = "^0.1.10"
+pydantic = "^2.7.4"
+pydantic-settings = "^2.3.3"
+pyvis = "^0.3.2"
+loguru = "^0.7.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
