@@ -61,7 +61,7 @@ retriever = index.as_retriever(
     include_text=True,  # include source chunk with matching paths
     similarity_top_k=2,  # top k for vector kg node retrieval
 )
-nodes = retriever.retrieve("Borrower will")
+nodes = retriever.retrieve("Measures for Waste")
 from pprint import pprint
 for node in nodes:
     pprint(node.text)
@@ -69,7 +69,7 @@ query_engine = index.as_query_engine(
     include_text=True,  # include source chunk with matching paths
     similarity_top_k=2,  # top k for vector kg node retrieval
 )
-response = query_engine.query("Borrower will")
+response = query_engine.query("Generate a list of questions for assessing the borrower requirements?")
 response.response
 
 from llama_index.core import VectorStoreIndex
@@ -79,18 +79,36 @@ rag_retriever = rag_index.as_retriever(
     include_text=True,  # include source chunk with matching paths
     similarity_top_k=2,  # top k for vector kg node retrieval
 )
-nodes = rag_retriever.retrieve("Borrower")
+nodes = rag_retriever.retrieve("Generate a list of questions for assessing the borrower requirements?")
+nodes = rag_retriever.retrieve("Generate a list of questions for assessing the borrower requirements?")
 
 rag_query_engine = rag_index.as_query_engine(
     include_text=True,  # include source chunk with matching paths
     similarity_top_k=2,  # top k for vector kg node retrieval
 )
-rag_response = rag_query_engine.query("Borrower will")
+rag_response = rag_query_engine.query("Generate a list of questions for assessing the borrower requirements?")
 
 import pprint
 pprint.pprint(f"Graph RAG response: {response.response}")
 pprint.pprint(f"Vector RAG response: {rag_response.response}")
 
+
+def print_and_save_response(response, filename, type_of_rag):
+    pprint.pprint(response)
+    with open(filename, 'w') as file:
+        file.write(f"Type of RAG: {type_of_rag}\n")
+        file.write("Response:\n")
+        pprint.pprint(response, stream=file)
+              
+# filename = f"..\..\data\2-interim\{type_of_rag}response.txt"
+
+
+# Define filenames
+filename_graph_rag = r"..\..\data\2-interim\Graph_RAG_response.txt"
+filename_rag = r"..\..\data\2-interim\RAG_response.txt"
+
+print_and_save_response(response, filename_graph_rag, 'Graph RAG')
+print_and_save_response(rag_response, filename_rag, 'RAG')
 
 # Function to extract and print document information
 def extract_documents_from_response(response):
